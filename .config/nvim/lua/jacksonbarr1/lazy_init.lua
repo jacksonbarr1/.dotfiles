@@ -12,6 +12,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	spec = "jacksonbarr1.plugins",
+    { import = "jacksonbarr1.plugins" },
     { "nvim-treesitter/nvim-treesitter", branch = "master", lazy = false, build = ":TSUpdate" }
 })
