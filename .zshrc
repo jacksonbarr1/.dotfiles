@@ -116,3 +116,7 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Add SSH key
 ssh-add ~/.ssh/id_ed25519_debian &> /dev/null
+
+export TERM="xterm-256color"
+
+ZLE_RPROMPT_INDENT=0
