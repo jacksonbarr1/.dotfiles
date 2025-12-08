@@ -21,6 +21,8 @@ o.softtabstop = 4
 o.shiftwidth = 4
 o.expandtab = true
 
+o.winborder = "rounded"
+
 o.smartindent = true
 
 o.wrap = false
