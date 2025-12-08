@@ -58,7 +58,8 @@ bindsym $mod+d exec $wm_setting_app_launcher
 # Run a window compositor
 exec_always --no-startup-id $wm_setting_app_compositor
 
-# Startup polybar
+# Clean up then start polybar
+exec_always --no-startup-id killall -q polybar
 exec_always --no-startup-id $wm_setting_app_statusbar
 
 ### Workspaces ###
@@ -174,6 +175,16 @@ client.background       $wm_color_background
 # 		urgent_workspace   $bar_color_workspace_urgent_bg   $bar_color_workspace_urgent_bg   $bar_color_workspace_urgent_fg
 # 	}
 # }
+
+### Screenshot utility
+# Full Screen
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+
+# Active Window
+bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+
+# Selected Region
+bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
 
 ### Miscellaneous settings ###
 # Set the font used for titlebars (which are hidden here)
