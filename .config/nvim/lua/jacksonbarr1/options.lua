@@ -36,8 +36,7 @@ o.incsearch = true
 
 o.termguicolors = true
 
-o.scrolloff= 8
+o.scrolloff = 8
 o.signcolumn = "yes"
 
 o.updatetime = 50
-

@@ -1,3 +1,10 @@
+local diagnostic_icons = {
+	ERROR = " ",
+	WARN = " ",
+	HINT = " ",
+	INFO = " ",
+}
+
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
@@ -24,6 +31,11 @@ return {
 				-- map("<leader>ws", require("telescope.builtin").lsp_dynamic_workplace_symbols, "[W]orkspace [S]ymbols")
 				map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 				map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction", { "n", "x" })
+
+				map("<leader>d[", vim.diagnostic.goto_next, "Go to previous diagnostic message")
+				map("<leader>d]", vim.diagnostic.goto_prev, "Go to next diagnostic message")
+				map("<leader>do", vim.diagnostic.open_float, "Open diagnostic message")
+				map("<leader>dd", require("telescope.builtin").diagnostics, "[D]iagnostic [D]etails")
 
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
@@ -56,6 +68,37 @@ return {
 				end
 			end,
 		})
+
+		vim.diagnostic.config({
+			virtual_text = {
+				severity = nil,
+				source = "if_many",
+				format = function(diagnostic)
+					local reduced = { ["Lua Diagnostics."] = "", ["Lua Syntax Check."] = "" }
+					local msg = diagnostic_icons[vim.diagnostic.severity[diagnostic.severity]]
+					if reduced[diagnostic.message] ~= nil then
+						return msg .. " " .. reduced[diagnostic.message]
+					end
+					return msg .. " " .. diagnostic.message
+				end,
+				prefix = "",
+				spacing = 4,
+			},
+			float = {
+				border = "rounded",
+				source = false,
+				format = function(diagnostic)
+					return diagnostic.message
+				end,
+				prefix = function(diagnostic)
+					local level = vim.diagnostic.severity[diagnostic.severity]
+					local pref = string.format(" %s ", diagnostic_icons[level])
+					return pref, "Diagnostic" .. level:gsub("^%l", string.upper)
+				end,
+			},
+			signs = false,
+		})
+
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 

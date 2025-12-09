@@ -132,11 +132,11 @@ return {
 					-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
 					group_index = 0,
 				},
-				{ name = "nvim_lsp" },
+				{ name = "nvim_lsp", max_item_count = 7 },
 				{ name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "path" },
-				{ name = "copilot" },
+				{ name = "copilot", priority = 100, max_item_count = 3 },
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
