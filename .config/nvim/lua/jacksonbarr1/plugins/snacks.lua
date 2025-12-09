@@ -1,10 +1,10 @@
 return {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    opts = {
-        notifier = { enabled = true },
-        input = { enabled = true },
-        picker = { enabled = true }
-    }
+	"folke/snacks.nvim",
+	priority = 1000,
+	lazy = false,
+	opts = {
+		notifier = { enabled = true },
+		input = { enabled = true },
+		picker = { enabled = true },
+	},
 }
