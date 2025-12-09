@@ -25,11 +25,13 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
+		"zbirenbaum/copilot-cmp",
 	},
 	config = function()
 		-- See `:help cmp`
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
+		local copilot = require("copilot_cmp").setup()
 		luasnip.config.setup({})
 
 		local kind_icons = {
@@ -59,6 +61,15 @@ return {
 			Operator = "󰆕",
 			TypeParameter = "󰊄",
 		}
+
+		local has_words_before = function()
+			if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+				return false
+			end
+			local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+			return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+		end
+
 		cmp.setup({
 			snippet = {
 				expand = function(args)
@@ -107,25 +118,13 @@ return {
 					end
 				end, { "i", "s" }),
 
-				-- Select next/previous item with Tab / Shift + Tab
-				["<Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item()
-					elseif luasnip.expand_or_locally_jumpable() then
-						luasnip.expand_or_jump()
+				["<Tab>"] = vim.schedule_wrap(function(fallback)
+					if cmp.visible() and has_words_before() then
+						cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
 					else
 						fallback()
 					end
-				end, { "i", "s" }),
-				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item()
-					elseif luasnip.locally_jumpable(-1) then
-						luasnip.jump(-1)
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
+				end),
 			}),
 			sources = {
 				{
@@ -137,6 +136,7 @@ return {
 				{ name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "path" },
+				{ name = "copilot" },
 			},
 			formatting = {
 				fields = { "kind", "abbr", "menu" },
@@ -147,6 +147,7 @@ return {
 						luasnip = "[Snippet]",
 						buffer = "[Buffer]",
 						path = "[Path]",
+						copilot = "[Copilot]",
 					})[entry.source.name]
 					return vim_item
 				end,
