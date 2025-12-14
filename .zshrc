@@ -109,3 +109,6 @@ export EDITOR='nvim'
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias vim='nvim'
 alias vi='nvim'
+
+# Created by `pipx` on 2025-12-14 19:17:46
+export PATH="$PATH:/home/jackson/.local/bin"
