@@ -4,5 +4,6 @@ return {
 	lazy = false,
 	opts = {
 		notifier = { enabled = true },
+        picker = { enabled = true },
 	},
 }
