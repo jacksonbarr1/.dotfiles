@@ -1,3 +1,5 @@
 theme = Catppuccin Frappe
 background-opacity = 0.85
 
+keybind = ctrl+enter=unbind
+
