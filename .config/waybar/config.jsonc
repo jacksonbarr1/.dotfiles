@@ -43,7 +43,16 @@
         "cpu": {
             "interval": 1,
             "format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
-            "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+            "format-icons": [
+                "▁",
+                "▂",
+                "▃",
+                "▄",
+                "▅",
+                "▆",
+                "▇",
+                "█"
+            ],
             "on-click": "ghostty -e btop"
         },
         "memory": {
@@ -53,7 +62,9 @@
         },
         "custom/uptime": {
             "format": "{}",
-            "format-icon": [""],
+            "format-icon": [
+                ""
+            ],
             "tooltip": false,
             "interval": 60,
             "exec": "$HOME/.config/waybar/scripts/uptime.sh"
@@ -62,7 +73,11 @@
             "format": "{icon}  {volume}%",
             "format-muted": "",
             "format-icons": {
-              "default": ["", "", " "]
+                "default": [
+                    "",
+                    "",
+                    " "
+                ]
             },
             "on-click": "pavucontrol"
         },
