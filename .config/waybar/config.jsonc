@@ -1,0 +1,96 @@
+[
+    {
+        "output": "HDMI-A-1",
+        "layer": "top",
+        "position": "top",
+        "spacing": 0,
+        "modules-left": [
+            "hyprland/workspaces",
+            "custom/uptime",
+            "cpu",
+            "memory"
+        ],
+        "modules-center": [
+            "clock"
+        ],
+        "modules-right": [
+            "custom/pomodoro",
+            "network",
+            "pulseaudio",
+            "backlight",
+            "custom/lock"
+        ],
+        "hyprland/workspaces": {
+            "format": "{name}: {icon}",
+            "format-icons": {
+                "active": "",
+                "default": ""
+            }
+        },
+        "clock": {
+            "timezone": "America/New_York",
+            "tooltip": false,
+            "format": "{:%I:%M %p - %A, %B %d}"
+        },
+        "network": {
+            "format-wifi": "󰤢",
+            "format-ethernet": "󰤨",
+            "format-disconnected": "󰤠",
+            "interval": 5,
+            "on-click": "nm-connection-editor"
+        },
+        "cpu": {
+            "interval": 1,
+            "format": "  {icon0}{icon1}{icon2}{icon3} {usage:>2}%",
+            "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+            "on-click": "ghostty -e btop"
+        },
+        "memory": {
+            "interval": 30,
+            "format": "  {}%",
+            "tooltip-format": "Memory"
+        },
+        "custom/uptime": {
+            "format": "{}",
+            "format-icon": [""],
+            "tooltip": false,
+            "interval": 60,
+            "exec": "$HOME/.config/waybar/scripts/uptime.sh"
+        },
+        "pulseaudio": {
+            "format": "{icon}  {volume}%",
+            "format-muted": "",
+            "format-icons": {
+              "default": ["", "", " "]
+            },
+            "on-click": "pavucontrol"
+        },
+        "custom/pomodoro": {
+            "format": "{}",
+            "return-type": "json",
+            "exec": "waybar-module-pomodoro --no-work-icons",
+            "on-click": "waybar-module-pomodoro toggle",
+            "on-click-right": "waybar-module-pomodoro reset"
+        },
+        "custom/lock": {
+            "tooltip": false,
+            "on-click": "sh -c '(sleep 0s; hyprlock)' & disown",
+            "format": ""
+        }
+    }
+    //,
+    // {
+    //     "output": "DP-1",
+    //     "layer": "top",
+    //     "modules-center": [
+    //         "hyprland/workspaces"
+    //     ],
+    //     "hyprland/workspaces": {
+    //         "format": "{name}: {icon}",
+    //         "format-icons": {
+    //             "active": "",
+    //             "default": ""
+    //         }
+    //     }
+    // }
+]
