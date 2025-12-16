@@ -46,7 +46,7 @@
 }
 
 #workspaces button {
-    color: #eebebe;
+    color: #737994;
     border-radius: 5px;
     padding: 0.3rem 0.6rem;
     background: transparent;
@@ -56,8 +56,8 @@
 }
 
 #workspaces button.active {
-    color: #a6d189;
-    background-color: rgba(166, 209, 137, 0.1);
+    color: #c6d0f5;
+    background-color: rgba(65, 69, 89, 0.9);
     box-shadow: inset 0 0 0 1px rgba(166, 209, 137, 0.2);
 }
 
@@ -155,4 +155,5 @@
 
 #custom-spotify:hover {
     background-color: #414559;
+    transition: background-color 0.2s ease-in-out 
 }
